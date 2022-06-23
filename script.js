@@ -217,7 +217,6 @@ const removeOneElement = e => {
       if(index > 0){
         let removeFund = parseFloat(remove);
 
-        console.log(removeFund);
         Math.floor(startFunds -= removeFund);
         Math.floor(days -= removeFund / daysLeftInCurrentMonth);
         Math.floor(month -= removeFund / daysInCurrentMonth);
