@@ -15,9 +15,6 @@
   .aside-left h2 {
     font-size: 18px;
   }
-  .aside-right .buttons {
-    flex-direction: column;
-  }
   .aside-right button {
     text-align: center;
   }
