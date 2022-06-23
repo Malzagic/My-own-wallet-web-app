@@ -12,18 +12,35 @@
   .header p {
     font-size: 12px;
   }
+  .aside-right {
+    padding: 0 0 10px 0;
+    margin:  auto 10px;
+  }
+  .aside-left {
+    padding: 0 10px;
+  }
   .aside-left h2 {
     font-size: 18px;
   }
-  .aside-right button {
+  /* .aside-right button {
     text-align: center;
-  }
+  } */
   .btn {
+    display: inline-block;
     color: #333;
+    font-size: 10px;
+    padding: 10px 35px;
   }
   .aside-right h2 {
     font-size: 18px;
     padding-bottom: 0;
+  }
+
+  .income {
+    margin: 5px 5px 5px 0;
+  }
+  .expenses {
+    margin: 5px 0 5px 5px;
   }
 
   .income h3 {
