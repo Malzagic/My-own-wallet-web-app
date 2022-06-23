@@ -18,9 +18,9 @@
   .aside-right button {
     text-align: center;
   }
-  /* .btn {
-    padding: 5px 35px;
-  } */
+  .btn {
+    color: #333;
+  }
 
   .aside-right h2 {
     font-size: 18px;
