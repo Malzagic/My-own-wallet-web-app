@@ -11,6 +11,10 @@ body {
   color: #ddd;
 }
 
+button {
+  color: #333;
+}
+
 .container {
   display: flex;
   flex-direction: row;
