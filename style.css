@@ -114,6 +114,7 @@ body {
 }
 
 .btn {
+  color: #333;
   display: inline-block;
   background-color: #ddd;
   padding: 10px 55px;
