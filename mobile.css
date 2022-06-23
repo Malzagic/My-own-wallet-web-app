@@ -1,0 +1,84 @@
+@media (max-width: 500px) {
+  .container {
+    width: 100%;  
+  }
+  .app-body {
+    flex-direction: column;
+    padding: 0;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .header p {
+    font-size: 12px;
+  }
+  .aside-left h2 {
+    font-size: 18px;
+  }
+  .aside-right .buttons {
+    flex-direction: column;
+  }
+  .aside-right button {
+    text-align: center;
+  }
+  .btn {
+    padding: 5px 35px;
+  }
+
+  .aside-right h2 {
+    font-size: 18px;
+    padding-bottom: 0;
+  }
+
+  .income h3 {
+    font-size: 16px;
+  }
+  .expenses h3 {
+    font-size: 16px;
+  }
+
+  .aside-remainder{ 
+    font-size: 12px;
+  }
+
+  /* POPUP */
+  .popup-form {
+    text-align: center;
+  }
+  .popup-title {
+    padding: 0;
+  }
+  .popup-title .title{
+    font-size: 22px;
+    text-align: center;
+  }
+  .popup-form {
+    margin-top: 0;
+  }
+  .popup-form label {
+    font-size: 22px;
+    margin-top: 10px;
+  }
+  .popup-form input {
+    width: 60%;
+    padding: 0;
+  }
+  .popup-form select {
+    width: 60%;
+    padding: 0;
+  }
+  .instruction {
+    font-size: 12px;
+  }
+  .popup-form .buttons {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .popup-form button {
+    margin: 5px;
+  }
+  .item {
+    font-size: 12px;
+  }
+}

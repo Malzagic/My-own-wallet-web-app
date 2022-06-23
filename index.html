@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wallet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,700;1,200&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="mobile.css">
+  <script src="https://kit.fontawesome.com/9433bb0238.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1 class="title"><i class="fas fa-wallet"></i> Wallet</h1>
+      <p>Zarządzaj domowym budżetem!</p>
+    </div>
+    <div class="app-body">
+      <div class="aside-left">
+        <h2>Lista transakcji</h2>
+        <div class="report">
+          <div class="income">
+            <h3 class="income-title">Przychód:</h3>
+          </div>
+          <div class="expenses">
+            <h3 class="expenses-title">Wydatki:</h3>
+          </div>
+        </div>
+      </div>
+      <div class="aside-right">
+        <h2>Dostępne środki:</h2>
+        <p class="avaible"></p>
+        <div class="buttons">
+          <button type="submit" class="add-transaction btn"><i class="fas fa-plus"></i> Dodaj transakcję</button>
+          <button type="submit" class="remove-transaction btn"><i class="fas fa-trash-alt"></i> Usuń wszystkie</button>
+        </div>
+        <p class="aside-remainder">Możesz wydać: <span class="days"></span> na dzień! Do końca miesiąca.</p>
+        <p class="aside-remainder">Możesz wydać: <span class="monthly"></span> ! Do końca miesiąca.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup-body">
+    <div class="popup-title">
+      <h1 class="title">Dodaj nową transakcję</h1>
+    </div>
+    <form class="popup-form">
+      <label for="name">Nazwa:</label>
+      <p class="instruction">(podaj nazwę transakcji)</p>
+      <input type="text" name="name" required>
+      <label for="sum">Kwota:</label>
+      <p class="instruction">(podaj kwotę transakcji, jeśli dodajesz wydatek postaw znak minusa na początku kwoty)</p>
+      <input type="number" name="sum" required>
+      <label for="select">Wybierz kategorię:</label>
+      <p class="instruction">([+] oznacza przychód [-] oznacza wydatek)</p>
+      <select name="select" id="select">
+        <option value="0" selected disabled>-Wybierz kategorię-</option>
+        <option value="income">[+]Przychód</option>
+        <option value="expenses">[-]Wydatek</option>
+      </select>
+      <div class="buttons">
+        <button type="submit" class="save btn"><i class="far fa-save"></i> Zapisz</button>
+        <button type="submit" class="cancel btn"><i class="far fa-window-close"></i> Anuluj</button>
+      </div>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
