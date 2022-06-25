@@ -149,7 +149,7 @@ const getDaysInMonth = (year, month) => {
 
 
 // Get today date and put it into a html and show how much days lefto to end of the month
-const todaysDays = () => {
+const toDayDays = () => {
   today.classList.add('answear');
   today.textContent = `${currentDay}-${currentMonth}-${currentYear}`;
   daysLeft.classList.add('answear');
@@ -282,7 +282,7 @@ const loadEvents = () => {
 
 window.onload = () => {
   // Todays days function
-  todaysDays();
+  toDayDays();
 }
 
 // Load events here
