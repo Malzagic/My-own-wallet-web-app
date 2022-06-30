@@ -1,8 +1,10 @@
 # My-own-wallet
 
+application under development....
+
 Hello,
 
-I'm create wallet web application to manage monthly budget. It's simply app which can easly help us in our daily life.
+I'm createing wallet web application to manage monthly budget. It's simply app which can easly help us in our daily life.
 
 To start use app you need to click add new transaction and input your whole monthly budget or your left to end of the month budget.
 
