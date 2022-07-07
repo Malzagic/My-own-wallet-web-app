@@ -74,11 +74,12 @@
   }
   .popup-form input {
     width: 60%;
-    padding: 0;
+  }
+  .popup-form input[type="date"] {
+    width: 60%;
   }
   .popup-form select {
     width: 60%;
-    padding: 0;
   }
   .instruction {
     font-size: 12px;
