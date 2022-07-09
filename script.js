@@ -177,9 +177,9 @@ const setNewDate = () => {
     changeDateClicked = 0;
   } else if(changeDateClicked === 1){
     dateChoosen = new Date(dateInput.value);
-    let calcNewDays = calcDays()
+    getPaycheckDays = getDaysLeftPaycheck(dateChoosen, date)
+    fundsPerDayEngine();
     closePopUpDate();
-    changeDateClicked = 0;
   } else {
     openPopUp();
     dataChecked++;
@@ -214,7 +214,6 @@ const fundsEngine = (newSum) => {
 
   avaibleFunds.innerHTML = `<span>${startFunds.toFixed(2)}</span> zł`;
 
-  fundsPerDayEngine(newSum);
 
   if(startFunds === 0) {
     alert('Brak przychodów!');
@@ -226,17 +225,20 @@ const fundsEngine = (newSum) => {
     perDays.classList.add('answear');
     perMonth.classList.add('answear');
   }
+  fundsPerDayEngine();
 }
 
-const fundsPerDayEngine = (newSum) => {
+const fundsPerDayEngine = () => {
+
+  const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
   
   daysLeftInCurrentMonth = getPaycheckDays;
   daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth, currentDay * 0).getDate();
 
   if(daysLeftInCurrentMonth === 0) daysLeftInCurrentMonth = 1;
-  
-  let getCalcDays = calcDays(newSum, daysLeftInCurrentMonth);
-  let getCalcMonth = calcMonth(newSum, daysInCurrentMonth);
+
+  let getCalcDays = calcDays(Number(newAvaibleFunds), daysLeftInCurrentMonth);
+  let getCalcMonth = calcMonth(Number(newAvaibleFunds), daysInCurrentMonth);
 
   days = getCalcDays;
   month = getCalcMonth;
@@ -246,20 +248,25 @@ const fundsPerDayEngine = (newSum) => {
 
   perDays.classList.add('answear');
   perMonth.classList.add('answear');
+  changeDateClicked = 0;
 }
 
 
 const calcDays = (newSum, daysLeftInCurrentMonth) => {
-  return days += newSum / daysLeftInCurrentMonth;
+  if(changeDateClicked === 1) {
+    return days = newSum / daysLeftInCurrentMonth;
+  } else {
+    return days += newSum / daysLeftInCurrentMonth;
+  }
 }
 
 const calcMonth = (newSum, daysInCurrentMonth) => {
-  return month += newSum / daysInCurrentMonth
+  if(changeDateClicked === 1) {
+    return month = newSum / daysInCurrentMonth;
+  } else {
+    return month += newSum / daysInCurrentMonth;
+  }
 }
-
-const getNewestCalc = (newAvaibleFunds) => {
-  console.log(newAvaibleFunds);
-} 
 
 // Remove one chosen element from list
 const removeOneElement = e => {
@@ -356,8 +363,6 @@ const loadEvents = () => {
   removeTransaction.addEventListener('click', removeAllEngine);
   // change date of founds
   changeDateBtn.addEventListener('click', () => {
-    const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
-    getNewestCalc(newAvaibleFunds);
     openPopUpDate();
     dateChoosen = '';
     changeDateClicked++
