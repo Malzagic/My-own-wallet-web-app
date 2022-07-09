@@ -232,6 +232,7 @@ const fundsEngine = (newSum) => {
 const fundsPerDayEngine = () => {
 
   const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
+  console.log(newAvaibleFunds);
   
   daysLeftInCurrentMonth = getPaycheckDays;
   daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth, currentDay * 0).getDate();
@@ -254,18 +255,23 @@ const fundsPerDayEngine = () => {
 
 
 const calcDays = (newSum, daysLeftInCurrentMonth) => {
+  console.log(changeDateClicked);
   if(changeDateClicked === 1) {
+    days = 0;
     return days = newSum / daysLeftInCurrentMonth;
   } else {
-    return days += newSum / daysLeftInCurrentMonth;
+    days = newSum;
+    return days = newSum / daysLeftInCurrentMonth;
   }
 }
 
 const calcMonth = (newSum, daysInCurrentMonth) => {
   if(changeDateClicked === 1) {
+    month = 0;
     return month = newSum / daysInCurrentMonth;
   } else {
-    return month += newSum / daysInCurrentMonth;
+    month = newSum;
+    return month = newSum / daysInCurrentMonth;
   }
 }
 
