@@ -225,6 +225,7 @@ const fundsEngine = (newSum) => {
     perDays.classList.add('answear');
     perMonth.classList.add('answear');
   }
+  getPaycheckDays = getDaysLeftPaycheck(dateChoosen, date)
   fundsPerDayEngine();
 }
 
@@ -232,7 +233,6 @@ const fundsPerDayEngine = () => {
 
   const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
   
-  getPaycheckDays = getDaysLeftPaycheck(dateChoosen, date)
   daysLeftInCurrentMonth = getPaycheckDays;
   daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth, currentDay * 0).getDate();
 
