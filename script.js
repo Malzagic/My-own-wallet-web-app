@@ -232,6 +232,7 @@ const fundsPerDayEngine = () => {
 
   const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
   
+  getPaycheckDays = getDaysLeftPaycheck(dateChoosen, date)
   daysLeftInCurrentMonth = getPaycheckDays;
   daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth, currentDay * 0).getDate();
 
