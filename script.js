@@ -78,6 +78,7 @@ const closePopUp = () => {
   selectedCategory.selectedIndex = '0';
 }
 
+// Close popup with calendar
 const closePopUpDate = () => {
   // set display none
   popUpDate.style.display = 'none';
@@ -229,10 +230,10 @@ const fundsEngine = (newSum) => {
   fundsPerDayEngine();
 }
 
+// Function get inputed paycheck and days of inputed days and days left to the end of the month and put it into html
 const fundsPerDayEngine = () => {
 
   const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
-  console.log(newAvaibleFunds);
   
   daysLeftInCurrentMonth = getPaycheckDays;
   daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth, currentDay * 0).getDate();
@@ -253,9 +254,8 @@ const fundsPerDayEngine = () => {
   changeDateClicked = 0;
 }
 
-
+// Function calculate input paycheck for days left to input date into application 
 const calcDays = (newSum, daysLeftInCurrentMonth) => {
-  console.log(changeDateClicked);
   if(changeDateClicked === 1) {
     days = 0;
     return days = newSum / daysLeftInCurrentMonth;
@@ -265,6 +265,7 @@ const calcDays = (newSum, daysLeftInCurrentMonth) => {
   }
 }
 
+// Function calculate input paycheck for days left to end of the current month
 const calcMonth = (newSum, daysInCurrentMonth) => {
   if(changeDateClicked === 1) {
     month = 0;
