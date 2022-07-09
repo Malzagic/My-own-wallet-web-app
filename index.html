@@ -13,6 +13,7 @@
   <script src="https://kit.fontawesome.com/9433bb0238.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- Body of app -->
   <div class="container">
     <div class="header">
       <h1 class="title"><i class="fas fa-wallet"></i> Wallet</h1>
@@ -37,13 +38,16 @@
           <button type="button" class="add-transaction btn"><i class="fas fa-plus"></i> Dodaj transakcję</button>
           <button type="button" class="remove-transaction btn"><i class="fas fa-trash-alt"></i> Usuń wszystkie</button>
         </div>
-        <p class="aside-remainder">Możesz wydać: <span class="days"></span> na dzień! Do końca miesiąca.</p>
+        <p class="aside-remainder">Możesz wydać: <span class="days"></span> na dzień! Do wypłaty.</p>
         <p class="aside-remainder">Możesz wydać: <span class="monthly"></span> ! Do końca miesiąca.</p>
-        <p class="aside-remainder">Dzisiaj jest: <span class="today"></span> Do końca miesiąca: <span class="days-left"></span> pozostało!</p>
+        <p class="aside-remainder">Twoja wypłata: <span class="today"></span> Do wypłaty pozostało: <span class="days-left"></span></p>
+        <button type="button" class="change-date btn">Zmień datę!</button>
       </div>
     </div>
   </div>
 
+
+  <!-- Popup input income or expenses -->
   <div class="popup-body">
     <div class="popup-title">
       <h1 class="title">Dodaj nową transakcję</h1>
@@ -51,7 +55,7 @@
     <form class="popup-form">
       <label for="name">Nazwa:</label>
       <p class="instruction">(podaj nazwę transakcji)</p>
-      <input type="text" name="name" required>
+      <input type="text" name="name" maxlength="20" required>
       <label for="sum">Kwota:</label>
       <p class="instruction">(podaj kwotę transakcji, jeśli dodajesz wydatek postaw znak minusa na początku kwoty)</p>
       <input type="number" name="sum" required>
@@ -68,6 +72,24 @@
       </div>
     </form>
   </div>
+
+  <!-- Popup add data -->
+  <div class="popup-body-date">
+    <div class="popup-title">
+      <h1 class="title">Podaj datę</h1>
+    </div>
+    <form class="popup-form">
+      <label for="date">Wypłata:</label>
+      <p class="instruction">(wprowadź kiedy dostajesz wypłatę)</p>
+      <input type="date" name="date" required>
+      <div class="buttons">
+        <button type="button" class="save date btn"><i class="far fa-save"></i> Zapisz</button>
+        <button type="button" class="cancel date btn"><i class="far fa-window-close"></i> Anuluj</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- run javascript -->
   <script src="script.js"></script>
 </body>
 </html>

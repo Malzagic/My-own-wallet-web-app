@@ -1,16 +1,21 @@
 const addTransaction = document.querySelector('.add-transaction');
 const removeTransaction = document.querySelector('.remove-transaction');
 const cancelBtn = document.querySelector('.cancel');
+const cancelDateBtn = document.querySelector('.cancel.date')
 const saveBtn = document.querySelector('.save');
+const saveDateBtn = document.querySelector('.save.date')
 const closeBtn = document.querySelector('li');
 const income = document.querySelector('.income');
 const expenses = document.querySelector('.expenses');
 const popUp = document.querySelector('.popup-body');
+const popUpDate = document.querySelector('.popup-body-date');
+const dateInput = document.querySelector('input[name=date]');
 const nameInput = document.querySelector('input[name=name]');
 const sumInput = document.querySelector('input[name=sum]');
 const selectedCategory = document.querySelector('#select');
 const daysLeft = document.querySelector('.days-left');
 const today = document.querySelector('.today');
+const changeDateBtn = document.querySelector('.change-date');
 
 // Get date for calculate it
 const date = new Date();
@@ -20,15 +25,19 @@ const currentDay = date.getDate();
 const currentHours = date.getHours();
 const currentMinutes = date.getMinutes();
 
-
 // Changing variables
 let daysLeftInCurrentMonth;
 let daysInCurrentMonth;
+let diffrenceInDays;
+let dataChecked = 0;
+let changeDateClicked = 0;
+let dateChoosen = 0;
+let getPaycheckDays;
 
 // Your budget avaible on start
 let avaibleFunds = document.querySelector('.avaible');
 let startFunds = 0;
-avaibleFunds.textContent = `${Number(startFunds)} zł`;
+avaibleFunds.innerHTML = `<span>${Number(startFunds)}</span> zł`;
 
 // Your budget per days on start
 let perDays = document.querySelector('.days');
@@ -43,10 +52,18 @@ perMonth.textContent = `${Number(month)} zł`;
 
 // Open popup panel
 const openPopUp = () => {
-  // set display flex
+  closePopUpDate();
+  // set display flex to first pop-up
   popUp.style.display = 'flex';
   // add animation
   popUp.classList.add('showpopup-animation');
+}
+
+const openPopUpDate = () => {
+  // set display flex for second pop-up, named: date
+  popUpDate.style.display = 'flex';
+  // add animation
+  popUpDate.classList.add('showpopup-animation');
 }
 
 // Close popup panel
@@ -59,6 +76,15 @@ const closePopUp = () => {
   nameInput.value = '';
   sumInput.value = '';
   selectedCategory.selectedIndex = '0';
+}
+
+const closePopUpDate = () => {
+  // set display none
+  popUpDate.style.display = 'none';
+  // remove animation
+  popUpDate.classList.remove('showpopup-animation');
+  // clear calendar
+  dateInput.value = '';
 }
 
 
@@ -119,7 +145,6 @@ const addElementEngine = () => {
       newSumNumber = Number(sumInput.value) * - 1;
     } else {
       newSumNumber = Number(sumInput.value);
-      console.log(Number(sumInput.value));
     }
     // create ul element to HTML
     const newUl = document.createElement('ul');
@@ -141,54 +166,54 @@ const addElementEngine = () => {
 
 }
 
+// Set here new date for calc your income and expenses
+const setNewDate = () => {
+  dateChoosen = new Date(dateInput.value)
+  today.classList.add('answear');
+  today.textContent = dateChoosen.toLocaleDateString();
 
-// Function to get days in month and days left to the end of the month
-const getDaysInMonth = (year, month) => {
-  return new Date(year, month, 0).getDate();
+  if(dateChoosen == 'Invalid Date') {
+    dateInput.classList.add('error');
+    changeDateClicked = 0;
+  } else if(changeDateClicked === 1){
+    dateChoosen = new Date(dateInput.value);
+    getPaycheckDays = getDaysLeftPaycheck(dateChoosen, date)
+    fundsPerDayEngine();
+    closePopUpDate();
+  } else {
+    openPopUp();
+    dataChecked++;
+  }
+  getPaycheckDays = getDaysLeftPaycheck(dateChoosen, date)
+  daysLeft.classList.add('answear');
+  daysLeft.textContent = `${getPaycheckDays}`;
 }
 
 
-// Get today date and put it into a html and show how much days lefto to end of the month
-const toDayDays = () => {
-  today.classList.add('answear');
-  today.textContent = `${currentDay}-${currentMonth}-${currentYear}`;
-  daysLeft.classList.add('answear');
-  daysLeftInCurrentMonth = getDaysInMonth(currentYear, currentMonth) - date.getDate();
-  daysLeft.textContent = `${daysLeftInCurrentMonth}`;
-  let timeout;
-  if(daysLeftInCurrentMonth === 0){
-    let interval = 6000;
-    timeout = setInterval(() => {
-      daysLeft.textContent = `${currentHours}:${currentMinutes}`;
-    }, interval);
-  } else {
-    clearInterval(timeout);
-  }
+// Function to get days in month and days left to the end of the month
+const getDaysInMonth = (year, month, day) => {
+  return new Date(year, month, day);
+}
+// Function calc days left to your paycheck
+const getDaysLeftPaycheck = (dateChoosen, date) => {
+  let diffrenceInTime = dateChoosen.getTime() - date.getTime();
+  return diffrenceInDays = Math.round(diffrenceInTime / (1000 * 3600 * 24));
 }
 
 // Engine to adding new funds for daily and monthly budget and for avaible funds
 const fundsEngine = (newSum) => {
+
   // calc new availbe funds
   Math.floor(startFunds += newSum);
 
   if(startFunds < 0){
     startFunds = 0;
 
-    avaibleFunds.textContent = `${startFunds.toFixed(0)} zł`;
+    avaibleFunds.innerHTML = `<span>${startFunds.toFixed(0)}</span> zł`;
   }
 
+  avaibleFunds.innerHTML = `<span>${startFunds.toFixed(2)}</span> zł`;
 
-  avaibleFunds.textContent = `${startFunds.toFixed(2)} zł`;
-
-  daysLeftInCurrentMonth = getDaysInMonth(currentYear, currentMonth) - date.getDate();
-  daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth);
-
-  if(daysLeftInCurrentMonth === 0){
-    daysLeftInCurrentMonth = 1;
-  }
-
-  Math.floor(days += newSum / daysLeftInCurrentMonth);
-  Math.floor(month += newSum / daysInCurrentMonth);
 
   if(startFunds === 0) {
     alert('Brak przychodów!');
@@ -199,6 +224,48 @@ const fundsEngine = (newSum) => {
 
     perDays.classList.add('answear');
     perMonth.classList.add('answear');
+  }
+  getPaycheckDays = getDaysLeftPaycheck(dateChoosen, date)
+  fundsPerDayEngine();
+}
+
+const fundsPerDayEngine = () => {
+
+  const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
+  
+  daysLeftInCurrentMonth = getPaycheckDays;
+  daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth, currentDay * 0).getDate();
+
+  if(daysLeftInCurrentMonth === 0) daysLeftInCurrentMonth = 1;
+
+  let getCalcDays = calcDays(Number(newAvaibleFunds), daysLeftInCurrentMonth);
+  let getCalcMonth = calcMonth(Number(newAvaibleFunds), daysInCurrentMonth);
+
+  days = getCalcDays;
+  month = getCalcMonth;
+
+  perDays.textContent = `${days.toFixed(2)} zł`;
+  perMonth.textContent = `${month.toFixed(2)} zł`;
+
+  perDays.classList.add('answear');
+  perMonth.classList.add('answear');
+  changeDateClicked = 0;
+}
+
+
+const calcDays = (newSum, daysLeftInCurrentMonth) => {
+  if(changeDateClicked === 1) {
+    return days = newSum / daysLeftInCurrentMonth;
+  } else {
+    return days += newSum / daysLeftInCurrentMonth;
+  }
+}
+
+const calcMonth = (newSum, daysInCurrentMonth) => {
+  if(changeDateClicked === 1) {
+    return month = newSum / daysInCurrentMonth;
+  } else {
+    return month += newSum / daysInCurrentMonth;
   }
 }
 
@@ -255,34 +322,52 @@ const removeAllEngine = () => {
   days = 0;
   month = 0;
 
+
   avaibleFunds.textContent = `${startFunds.toFixed(0)} zł`;
   perDays.textContent = `${days.toFixed(0)} zł`;
   perMonth.textContent = `${month.toFixed(0)} zł`;
 
   perDays.classList.remove('answear');
   perMonth.classList.remove('answear');
+  daysLeft.classList.remove('answear');
+  today.classList.remove('answear');
+  daysLeft.textContent = '';
+  today.textContent = '';
+  dataChecked = 0;
 }
 
 
 // Load whole events here by using one function
 const loadEvents = () => {
   // Start adding transaction, show popup
-  addTransaction.addEventListener('click', openPopUp);
+  addTransaction.addEventListener('click', () => {
+    if(dataChecked === 1) {
+      openPopUp();
+    } else {
+      openPopUpDate();
+      dataChecked = 0;
+    }
+  });
   // Cancel adding transaction by using "cancelBtn"
   cancelBtn.addEventListener('click', closePopUp);
+  // Cancel adding new date to calc founds
+  cancelDateBtn.addEventListener('click', closePopUpDate);
   // Add transaction by saving them in popup panel
   saveBtn.addEventListener('click', checkInput);
+  // Add new date to calc incomes and expenses
+  saveDateBtn.addEventListener('click', setNewDate);
   // Remove one element child from income list
   income.addEventListener('click', removeOneElement);
   // Remove one element child from expenses list
   expenses.addEventListener('click', removeOneElement);
   // Remove all
   removeTransaction.addEventListener('click', removeAllEngine);
-}
-
-window.onload = () => {
-  // Todays days function
-  toDayDays();
+  // change date of founds
+  changeDateBtn.addEventListener('click', () => {
+    openPopUpDate();
+    dateChoosen = '';
+    changeDateClicked++
+  });
 }
 
 // Load events here
