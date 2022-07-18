@@ -198,7 +198,7 @@ const getDaysInMonth = (year, month, day) => {
 // Function calc days left to your paycheck
 const getDaysLeftPaycheck = (dateChoosen, date) => {
   let diffrenceInTime = dateChoosen.getTime() - date.getTime();
-  return diffrenceInDays = Math.round(diffrenceInTime / (1000 * 3600 * 24));
+  return diffrenceInDays = Math.ceil(diffrenceInTime / (1000 * 3600 * 24));
 }
 
 // Engine to adding new funds for daily and monthly budget and for avaible funds
@@ -234,7 +234,7 @@ const fundsEngine = (newSum) => {
 const fundsPerDayEngine = () => {
 
   const newAvaibleFunds = document.querySelector('.avaible span').innerHTML;
-  
+
   daysLeftInCurrentMonth = getPaycheckDays;
   daysInCurrentMonth = getDaysInMonth(currentYear, currentMonth, currentDay * 0).getDate();
 
